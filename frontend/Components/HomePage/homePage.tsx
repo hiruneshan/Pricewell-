@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import './HomePage.css';
 
 type Product = {
   id: number;
@@ -78,19 +79,17 @@ const HomePage = () => {
   );
 
   return (
-    <main style={{ padding: '2rem', fontFamily: 'system-ui, sans-serif' }}>
-      <section style={{ maxWidth: 960, margin: '0 auto' }}>
-        <header style={{ marginBottom: '2rem' }}>
-          <h1 style={{ fontSize: '2.25rem', marginBottom: '0.5rem' }}>
-            Search products
-          </h1>
-          <p style={{ color: '#555', lineHeight: 1.6 }}>
+    <main className="home-page">
+      <section className="home-page__container">
+        <header className="home-page__header">
+          <h1 className="home-page__title">Search products</h1>
+          <p className="home-page__subtitle">
             Find the right product from the list below. Type a product name to filter results instantly.
           </p>
         </header>
 
-        <div style={{ marginBottom: '2rem' }}>
-          <label htmlFor="product-search" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>
+        <div className="home-page__search-area">
+          <label htmlFor="product-search" className="home-page__label">
             Search by product name
           </label>
           <input
@@ -99,48 +98,30 @@ const HomePage = () => {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search products..."
-            style={{
-              width: '100%',
-              padding: '0.9rem 1rem',
-              fontSize: '1rem',
-              borderRadius: 10,
-              border: '1px solid #d1d5db',
-              boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.05)',
-            }}
+            className="home-page__search-input"
           />
         </div>
 
-        <section>
-          <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>
-            Product list
-          </h2>
+        <section className="home-page__products">
+          <h2 className="home-page__products-title">Product list</h2>
 
           {loading ? (
-            <p style={{ color: '#666' }}>Loading products...</p>
+            <p className="home-page__message">Loading products...</p>
           ) : error ? (
-            <p style={{ color: '#c53030' }}>{error}</p>
+            <p className="home-page__message home-page__message--error">{error}</p>
           ) : filteredProducts.length === 0 ? (
-            <p style={{ color: '#666' }}>
+            <p className="home-page__message">
               No products match your search. Try a different keyword.
             </p>
           ) : (
-            <div style={{ display: 'grid', gap: '1rem' }}>
+            <div className="home-page__product-grid">
               {filteredProducts.map((product) => (
-                <article
-                  key={product.id}
-                  style={{
-                    padding: '1.25rem',
-                    borderRadius: 16,
-                    border: '1px solid #e5e7eb',
-                    background: '#fff',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                    <h3 style={{ margin: 0, fontSize: '1.125rem' }}>{product.name}</h3>
-                    <span style={{ fontWeight: 700, color: '#111' }}>{product.price}</span>
+                <article key={product.id} className="home-page__product-card">
+                  <div className="home-page__product-card-header">
+                    <h3 className="home-page__product-name">{product.name}</h3>
+                    <span className="home-page__product-price">{product.price}</span>
                   </div>
-                  <p style={{ margin: 0, color: '#4b5563', lineHeight: 1.7 }}>{product.description}</p>
+                  <p className="home-page__product-description">{product.description}</p>
                 </article>
               ))}
             </div>

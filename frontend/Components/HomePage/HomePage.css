@@ -1,0 +1,91 @@
+.home-page {
+  padding: 2rem;
+  font-family: system-ui, sans-serif;
+}
+
+.home-page__container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.home-page__header {
+  margin-bottom: 2rem;
+}
+
+.home-page__title {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.home-page__subtitle {
+  color: #555;
+  line-height: 1.6;
+}
+
+.home-page__search-area {
+  margin-bottom: 2rem;
+}
+
+.home-page__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.home-page__search-input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.home-page__products-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.home-page__message {
+  color: #666;
+}
+
+.home-page__message--error {
+  color: #c53030;
+}
+
+.home-page__product-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.home-page__product-card {
+  padding: 1.25rem;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.home-page__product-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.home-page__product-name {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.home-page__product-price {
+  font-weight: 700;
+  color: #111;
+}
+
+.home-page__product-description {
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.7;
+}
