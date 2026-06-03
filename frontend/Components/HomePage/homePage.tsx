@@ -1,4 +1,6 @@
-import { useMemo, useState } from 'react';
+'use client';
+
+import { useEffect, useMemo, useState } from 'react';
 
 type Product = {
   id: number;
@@ -7,7 +9,7 @@ type Product = {
   description: string;
 };
 
-const products: Product[] = [
+const placeholderProducts: Product[] = [
   {
     id: 1,
     name: 'PriceWell Pro Planner',
@@ -40,15 +42,39 @@ const products: Product[] = [
   },
 ];
 
+const fetchProducts = async (): Promise<Product[]> => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(placeholderProducts), 200);
+  });
+};
+
 const HomePage = () => {
+  const [products, setProducts] = useState<Product[]>([]);
   const [query, setQuery] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const data = await fetchProducts();
+        setProducts(data);
+      } catch (err) {
+        setError('Unable to load products.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
 
   const filteredProducts = useMemo(
     () =>
       products.filter((product) =>
         product.name.toLowerCase().includes(query.toLowerCase().trim()),
       ),
-    [query],
+    [products, query],
   );
 
   return (
@@ -89,7 +115,11 @@ const HomePage = () => {
             Product list
           </h2>
 
-          {filteredProducts.length === 0 ? (
+          {loading ? (
+            <p style={{ color: '#666' }}>Loading products...</p>
+          ) : error ? (
+            <p style={{ color: '#c53030' }}>{error}</p>
+          ) : filteredProducts.length === 0 ? (
             <p style={{ color: '#666' }}>
               No products match your search. Try a different keyword.
             </p>
